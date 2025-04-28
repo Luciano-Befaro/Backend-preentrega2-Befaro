@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ce830249-d064-4ad5-b3d1-9b4d667f2c10",
+    "title": "Producto Ninja",
+    "description": "Producto agregado en tiempo real",
+    "code": "auto",
+    "price": "999",
+    "status": true,
+    "stock": 1,
+    "category": "general",
+    "thumbnails": []
+  },
+  {
+    "id": "5304c1bb-34b8-4893-a489-3c60673555b9",
+    "title": "sdsdsd",
+    "description": "Producto agregado en tiempo real",
+    "code": "auto",
+    "price": "333",
+    "status": true,
+    "stock": 1,
+    "category": "general",
+    "thumbnails": []
+  }
+]
