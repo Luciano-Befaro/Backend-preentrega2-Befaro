@@ -20,5 +20,16 @@
     "stock": 1,
     "category": "general",
     "thumbnails": []
+  },
+  {
+    "id": "75700ea0-2fc8-4a17-be55-53b119cb0cc9",
+    "title": "Compu",
+    "description": "Producto desde websocket",
+    "code": "socket-code",
+    "price": 23000,
+    "status": true,
+    "stock": 1,
+    "category": "general",
+    "thumbnails": []
   }
 ]

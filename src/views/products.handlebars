@@ -1,0 +1,42 @@
+<h1>🛒 Lista de Productos</h1>
+
+{{#each products}}
+  <div style="border: 1px solid #ddd; margin: 10px; padding: 10px;">
+    <h3>{{this.title}}</h3>
+    <p><strong>Precio:</strong> ${{this.price}}</p>
+    <p><strong>Categoría:</strong> {{this.category}}</p>
+    <p><strong>Stock:</strong> {{this.stock}}</p>
+
+    <!-- ✅ Botón Agregar al Carrito (requiere lógica de cliente o fetch) -->
+    <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+  </div>
+{{/each}}
+
+<!-- 🔁 Paginación -->
+<div style="margin-top: 20px;">
+  {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">⏪ Anterior</a>
+  {{/if}}
+
+  Página {{currentPage}} de {{totalPages}}
+
+  {{#if hasNextPage}}
+    <a href="/products?page={{nextPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">Siguiente ⏩</a>
+  {{/if}}
+</div>
+
+<script>
+  // Requiere tener el ID del carrito activo
+  const cartId = "TU_CART_ID_AQUÍ"; // ⚠️ Podés reemplazarlo o hacerlo dinámico
+
+  function addToCart(productId) {
+    fetch(`/api/carts/${cartId}/product/${productId}`, {
+      method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Producto agregado al carrito");
+    })
+    .catch(err => console.error("Error al agregar al carrito", err));
+  }
+</script>
