@@ -1,34 +1,23 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import passport from './config/passport.js';
-import sessionRouter from './routes/sessions.router.js';
-import userRouter from './routes/users.router.js';
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
-// Cargar variables de entorno
-dotenv.config();
+import authRoutes from './routes/auth.routes.js'
+import productRoutes from './routes/product.routes.js'
+import cartRoutes from './routes/cart.routes.js'
+import purchaseRoutes from './routes/purchase.routes.js'
 
-const app = express();
-const PORT = process.env.PORT || 8080;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce';
+const app = express()
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
-// Rutas
-app.use('/api/sessions', sessionRouter);
-app.use('/api/users', userRouter);
+// Routes
+app.use('/api/auth', authRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/cart', cartRoutes)
+app.use('/api/purchase', purchaseRoutes)
 
-// Conexión a MongoDB (actualizada sin opciones deprecadas)
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('🚀 MongoDB Connected');
-    app.listen(PORT, () => {
-      console.log(`✅ Server running at http://localhost:${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('❌ MongoDB connection error:', err);
-  });
+export default app
