@@ -1,23 +1,23 @@
-import express from 'express'
-import cookieParser from 'cookie-parser'
-import cors from 'cors'
+import express from "express";
+import mongoose from "mongoose";
+import mocksRouter from "./routes/mocks.router.js";
+import usersRouter from "./routes/users.router.js";
+import petsRouter from "./routes/pets.router.js";
 
-import authRoutes from './routes/auth.routes.js'
-import productRoutes from './routes/product.routes.js'
-import cartRoutes from './routes/cart.routes.js'
-import purchaseRoutes from './routes/purchase.routes.js'
+const app = express();
 
-const app = express()
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
+// 🔗 Conexión a MongoDB
+mongoose
+  .connect("mongodb://localhost:27017/backend-preentrega2")
+  .then(() => console.log("🟢 Conectado a MongoDB"))
+  .catch(err => console.error("🔴 Error MongoDB:", err));
 
-// Routes
-app.use('/api/auth', authRoutes)
-app.use('/api/products', productRoutes)
-app.use('/api/cart', cartRoutes)
-app.use('/api/purchase', purchaseRoutes)
+// 🚏 Rutas principales
+app.use("/api/mocks", mocksRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/pets", petsRouter);
 
-export default app
+export default app;
